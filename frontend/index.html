@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cashbook Reconciliation</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="workspace">
+        <header class="topbar">
+          <div class="brand">
+            <img
+              class="logo"
+              src="/static/assets/zalopay_logo.png"
+              alt="ZaloPay FA Back Office"
+            />
+            <div class="brand-text">
+              <p class="eyebrow">Cashbook Reconciliation</p>
+              <h1>Reconcile your cashbook</h1>
+            </div>
+          </div>
+          <div class="topbar-right">
+            <img
+              class="toro"
+              src="/static/assets/Toro.jpg"
+              alt="Toro mascot"
+              onerror="this.style.display='none'"
+            />
+            <div class="status-pill" id="connectionState">Ready</div>
+          </div>
+        </header>
+
+        <div class="layout">
+          <form class="upload-panel" id="runForm">
+            <label class="dropzone">
+              <span class="label">Payment</span>
+              <input name="payment_file" type="file" accept=".xls,.xlsx" required />
+              <span class="file-name">Choose one payment file</span>
+            </label>
+
+            <label class="dropzone">
+              <span class="label">Bank Statements</span>
+              <input name="statement_files" type="file" accept=".xls,.xlsx" multiple required />
+              <span class="file-name">Choose one or more statement files</span>
+            </label>
+
+            <label class="dropzone">
+              <span class="label">Cashbook</span>
+              <input name="cashbook_file" type="file" accept=".xls,.xlsx" required />
+              <span class="file-name">Choose the cashbook report file</span>
+            </label>
+
+            <label class="field">
+              <span>Allowed difference threshold (VND)</span>
+              <input name="tolerance" type="number" min="0" step="1" value="0" />
+            </label>
+
+            <button class="primary-button" type="submit" id="submitButton">
+              Reconcile
+            </button>
+          </form>
+
+          <section class="result-panel">
+            <div class="progress-block">
+              <div class="section-title">
+                <h2>Progress</h2>
+                <span id="runIdLabel"></span>
+              </div>
+              <ol class="timeline" id="timeline">
+                <li>No run yet</li>
+              </ol>
+            </div>
+
+            <div class="summary-block" id="summaryBlock" hidden>
+              <div class="section-title">
+                <h2>Result</h2>
+                <a class="download-link" id="downloadXlsx" href="#">Download Excel</a>
+              </div>
+              <div id="alertSummary"></div>
+              <div class="actions">
+                <a class="secondary-link" id="downloadAlerts" href="#">Download alert report</a>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/app.js" type="module"></script>
+  </body>
+</html>
